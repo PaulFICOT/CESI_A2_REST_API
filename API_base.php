@@ -11,7 +11,6 @@ Class API
 		$this->reqArgs();
 
 	}
-	
 	// provides the response 
 	function reqArgs()
 	{
@@ -51,8 +50,8 @@ Class API
 
 			switch ($method) {
 				case 'GET':
-				if ($key==null) {
-					$bdd->getActionAll($table, $key);
+				if ($key == null) {
+					$bdd->getActionAll($table);
 				}
 				else{
 					$bdd->getAction($table, $key);
