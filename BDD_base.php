@@ -7,11 +7,13 @@ Class BDD
 	//get the selected row
 	public Function getAction($table, $key)
 	{
-		
-		 
+
 		try {
-            /*TODO : Find if there is an ID and do a prepared request according to the case */
-			
+			$sql_get = singleton::getInstance()->prepare("SELECT * FROM $table WHERE id=$key");
+			$sql_get->execute();
+			$result = $sql_get->fetchAll(PDO::FETCH_ASSOC);
+			echo var_dump($result);
+			echo json_encode($result);
 		}
 		catch (PDOException $e) {
     		echo $e->getMessage();
@@ -24,11 +26,9 @@ Class BDD
 	//update selected table 
 	public Function putAction($table, $key, $set)
 	{
-		
 		try {
-			/*TODO : prepare the request for one row update */
-			
-			
+			/*$sql_put = singleton::getInstance()->prepare("UPDATE `$table` SET ($set); WHERE id=$key");
+			$sql_put->execute();*/
 		}
 		catch (PDOException $e) {
     		echo $e->getMessage();
@@ -40,10 +40,9 @@ Class BDD
 	//insert a row from selected table
 	public Function postAction($table, $set)
 	{
-		
 		try{
-			/*TODO : prepare the request for one row insert */
-			
+			/*$sql_post = singleton::getInstance()->prepare("INSERT INTO `$table` VALUES ($set)");
+			$sql_post->execute();*/
 		}
 		catch (PDOException $e) {
     		echo $e->getMessage();
@@ -56,14 +55,29 @@ Class BDD
 	public Function deleteAction($table, $key)
 	{
 		try{
-			/*TODO : prepare the request for one row delete */
-			
+			/*$sql_delete = singleton::getInstance()->prepare("DELETE FROM '$table' WHERE id = '$key'");
+			$sql_delete->execute();*/
 		}
 		catch (PDOException $e) {
     		echo $e->getMessage();
     	exit;
 		}
 
+	}
+
+	public Function getActionAll()
+	{
+		try{
+			$sql_get = singleton::getInstance()->prepare("SELECT * FROM $table");
+			$sql_get->execute();
+			$result = $sql_get->fetchAll(PDO::FETCH_ASSOC);
+			echo var_dump($result);
+			echo json_encode($result);
+		}
+		catch (PDOException $e) {
+			echo $e->getMessage();
+		exit;
+		}
 	}
 
 
